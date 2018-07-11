@@ -24,7 +24,7 @@ public class TaskTemplateController {
     }
 
     @GetMapping(value="/{id}")
-    public TaskTemplate getTask(@PathVariable Integer id) throws Exception {
+    public TaskTemplate getTaskTemplate(@PathVariable Integer id) throws Exception {
         Optional<TaskTemplate> task = taskTemplateService.findById(id);
 
         if (!task.isPresent()) {
@@ -35,7 +35,7 @@ public class TaskTemplateController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveTask(@RequestBody TaskTemplate taskTemplate){
+    public ResponseEntity<Object> saveTaskTemplate(@RequestBody TaskTemplate taskTemplate){
         TaskTemplate savedTask = taskTemplateService.saveTaskTemplate(taskTemplate);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -45,7 +45,7 @@ public class TaskTemplateController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> updateTask(@PathVariable Integer id, @RequestBody TaskTemplate task){
+    public ResponseEntity<Object> updateTaskTemplate(@PathVariable Integer id, @RequestBody TaskTemplate task){
         Optional<TaskTemplate> taskOptional = taskTemplateService.findById(id);
 
         if (!taskOptional.isPresent())
@@ -59,7 +59,7 @@ public class TaskTemplateController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<Object> deleteTask(@PathVariable Integer id) {
+    public ResponseEntity<Object> deleteTaskTemplate(@PathVariable Integer id) {
         Optional<TaskTemplate> taskOptional = taskTemplateService.findById(id);
 
         if (!taskOptional.isPresent())
