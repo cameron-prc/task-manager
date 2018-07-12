@@ -9,23 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskTemplateService {
+public class TaskTemplateService implements TaskTemplateServiceInterface {
 
     @Autowired
     private TaskTemplateRepository taskTemplateRepository;
 
+    @Override
     public List<TaskTemplate> findAll() {
         return taskTemplateRepository.findAll();
     }
 
+    @Override
     public Optional<TaskTemplate> findById(int id) {
         return taskTemplateRepository.findById(id);
     }
 
+    @Override
     public TaskTemplate saveTaskTemplate(TaskTemplate taskTemplate) {
         return taskTemplateRepository.save(taskTemplate);
     }
 
+    @Override
     public void deleteTaskTemplate(TaskTemplate taskTemplate) {
         taskTemplateRepository.delete(taskTemplate);
     }

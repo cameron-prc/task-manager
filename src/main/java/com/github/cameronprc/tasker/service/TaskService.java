@@ -37,16 +37,16 @@ public class TaskService implements TaskServiceInterface {
         taskRepository.delete(task);
     }
 
+    @Override
     public List<Task> findUpcomingTasks() {
         Instant now = Instant.now();
         Instant before = now.minus(Duration.ofDays(7));
         Date dateBefore = Date.from(before);
 
-
-
         return taskRepository.findUpcomingTasks(dateBefore, new Date());
     }
 
+    @Override
     public List<Task> findTodaysTasks() {
         Instant now = Instant.now();
         Instant before = now.minus(Duration.ofDays(1));
@@ -55,6 +55,7 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findUpcomingTasks(dateBefore, new Date());
     }
 
+    @Override
     public List<Task> findUpcomingTasks(Date cutoff) {
         return taskRepository.findUpcomingTasks(cutoff, new Date());
     }
