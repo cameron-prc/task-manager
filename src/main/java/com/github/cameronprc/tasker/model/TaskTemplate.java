@@ -1,6 +1,7 @@
 package com.github.cameronprc.tasker.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class TaskTemplate {
@@ -13,8 +14,8 @@ public class TaskTemplate {
 
     private String description;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="taskScheduler")
-    private TaskScheduler taskScheduler;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="taskTemplate", targetEntity = TaskScheduler.class)
+    private List<TaskScheduler> taskScheduler;
 
     protected TaskTemplate() {}
 

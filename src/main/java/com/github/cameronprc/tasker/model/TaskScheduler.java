@@ -10,7 +10,7 @@ public class TaskScheduler {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, targetEntity = TaskTemplate.class)
     @JoinColumn(name="template_id")
     private TaskTemplate taskTemplate;
 
@@ -18,12 +18,16 @@ public class TaskScheduler {
 
     private Timestamp lastRun;
 
+    private Boolean allowDuplicates;
+
+
     public TaskScheduler() {}
 
-    public TaskScheduler(TaskTemplate taskTemplate, String cron, Timestamp lastRun) {
+    public TaskScheduler(TaskTemplate taskTemplate, String cron, Timestamp lastRun, Boolean allowDuplicates) {
         this.taskTemplate = taskTemplate;
         this.cron = cron;
         this.lastRun = lastRun;
+        this.allowDuplicates = allowDuplicates;
     }
 
     public void setId(int id) {
