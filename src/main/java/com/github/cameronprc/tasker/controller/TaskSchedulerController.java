@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value= "/api/v1/taskTemplates")
+@RequestMapping(value= "/api/v1/taskSchedulers")
 public class TaskSchedulerController {
 
     @Autowired
