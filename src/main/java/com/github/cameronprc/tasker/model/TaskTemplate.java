@@ -14,9 +14,6 @@ public class TaskTemplate {
 
     private String description;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="taskTemplate", targetEntity = TaskScheduler.class)
-    private List<TaskScheduler> taskScheduler;
-
     protected TaskTemplate() {}
 
     public TaskTemplate(String name, String description) {

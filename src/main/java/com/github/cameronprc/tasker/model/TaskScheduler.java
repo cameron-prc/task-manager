@@ -10,7 +10,7 @@ public class TaskScheduler {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch=FetchType.LAZY, targetEntity = TaskTemplate.class)
+    @ManyToOne(targetEntity = TaskTemplate.class)
     @JoinColumn(name="template_id")
     private TaskTemplate taskTemplate;
 
@@ -61,5 +61,9 @@ public class TaskScheduler {
 
     public Timestamp getLastRun() {
         return lastRun;
+    }
+
+    public Boolean getAllowDuplicates() {
+        return allowDuplicates;
     }
 }

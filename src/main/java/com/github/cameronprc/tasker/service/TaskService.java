@@ -27,6 +27,10 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findById(id);
     }
 
+    public List<Task> findByName(String name) {
+        return taskRepository.findByName(name);
+    }
+
     @Override
     public Task saveTask(Task task) {
         return taskRepository.save(task);
