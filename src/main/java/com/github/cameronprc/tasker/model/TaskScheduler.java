@@ -15,7 +15,8 @@ public class TaskScheduler {
     private TaskTemplate taskTemplate;
 
     private String frequencyCron;
-    private String dueCron;
+
+    private Integer daysWarning;
 
     private Timestamp lastRun;
 
@@ -24,10 +25,10 @@ public class TaskScheduler {
 
     public TaskScheduler() {}
 
-    public TaskScheduler(TaskTemplate taskTemplate, String frequencyCron, String dueCron, Timestamp lastRun, Boolean allowDuplicates) {
+    public TaskScheduler(TaskTemplate taskTemplate, String frequencyCron, Integer daysWarning, Timestamp lastRun, Boolean allowDuplicates) {
         this.taskTemplate = taskTemplate;
         this.frequencyCron = frequencyCron;
-        this.dueCron = dueCron;
+        this.daysWarning = daysWarning;
         this.lastRun = lastRun;
         this.allowDuplicates = allowDuplicates;
     }
@@ -63,4 +64,6 @@ public class TaskScheduler {
     }
 
     public Boolean getAllowDuplicates() { return allowDuplicates; }
+
+    public Integer getDaysWarning() { return daysWarning; }
 }
