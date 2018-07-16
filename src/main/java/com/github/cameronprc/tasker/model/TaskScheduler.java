@@ -14,7 +14,8 @@ public class TaskScheduler {
     @JoinColumn(name="template_id")
     private TaskTemplate taskTemplate;
 
-    private String cron;
+    private String frequencyCron;
+    private String dueCron;
 
     private Timestamp lastRun;
 
@@ -23,9 +24,10 @@ public class TaskScheduler {
 
     public TaskScheduler() {}
 
-    public TaskScheduler(TaskTemplate taskTemplate, String cron, Timestamp lastRun, Boolean allowDuplicates) {
+    public TaskScheduler(TaskTemplate taskTemplate, String frequencyCron, String dueCron, Timestamp lastRun, Boolean allowDuplicates) {
         this.taskTemplate = taskTemplate;
-        this.cron = cron;
+        this.frequencyCron = frequencyCron;
+        this.dueCron = dueCron;
         this.lastRun = lastRun;
         this.allowDuplicates = allowDuplicates;
     }
@@ -38,32 +40,27 @@ public class TaskScheduler {
         this.taskTemplate = taskTemplate;
     }
 
-    public void setCron(String cron) {
-        this.cron = cron;
+    public void setFrequencyCron(String cron) {
+        this.frequencyCron = cron;
     }
 
     public void setLastRun(Timestamp lastRun) {
         this.lastRun = lastRun;
     }
 
-    public int getId() {
-
-        return id;
-    }
+    public int getId() { return id; }
 
     public TaskTemplate getTaskTemplate() {
         return taskTemplate;
     }
 
-    public String getCron() {
-        return cron;
+    public String getFrequencyCron() {
+        return this.frequencyCron;
     }
 
     public Timestamp getLastRun() {
         return lastRun;
     }
 
-    public Boolean getAllowDuplicates() {
-        return allowDuplicates;
-    }
+    public Boolean getAllowDuplicates() { return allowDuplicates; }
 }
