@@ -94,7 +94,7 @@ public class TaskSchedulerService {
                 Date date = Date.from(nextExecution.get().toInstant());
 
 
-                Task newTask = new Task(template.getName(), template.getDescription(), date, false);
+                Task newTask = new Task(template.getName(), template.getDescription(), date, template.getReminderDays(), false);
 
                 taskService.saveTask(newTask);
             }

@@ -14,11 +14,15 @@ public class TaskTemplate {
 
     private String description;
 
+    private Integer reminderDays;
+
+
     protected TaskTemplate() {}
 
-    public TaskTemplate(String name, String description) {
+    public TaskTemplate(String name, String description, Integer reminderDays) {
         this.name = name;
         this.description = description;
+        this.reminderDays = reminderDays;
     }
 
     public int getId() {
@@ -33,6 +37,8 @@ public class TaskTemplate {
     public String getName() {
         return name;
     }
+
+    public Integer getReminderDays() { return reminderDays; }
 
     public void setName(String name) {
         this.name = name;

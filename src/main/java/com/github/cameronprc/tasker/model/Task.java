@@ -10,22 +10,34 @@ import java.util.Date;
 @Entity
 public class Task {
 
-    protected Task() {}
-
-    public Task(String name, String description, Date dueDate, Boolean completed) {
-        this.name = name;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.completed = completed;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String name;
+
     private String description;
+
     private Date dueDate;
+
     private Boolean completed;
+
+    private Integer reminderDays;
+
+
+    protected Task() {}
+
+    public Task(String name, String description, Date dueDate, Boolean completed) {
+        this(name, description, dueDate, null, completed);
+    }
+
+    public Task(String name, String description, Date dueDate, Integer reminderDays, Boolean completed) {
+        this.name = name;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.reminderDays = reminderDays != null ? reminderDays : 0;
+        this.completed = completed;
+    }
 
     public int getId() {
         return id;
@@ -41,16 +53,6 @@ public class Task {
 
     public Date getDueDate() {
         return dueDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dueDate=" + dueDate +
-                ", completed=" + completed +
-                '}';
     }
 
     public Boolean getCompleted() {
@@ -75,5 +77,15 @@ public class Task {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dueDate=" + dueDate +
+                ", completed=" + completed +
+                '}';
     }
 }
