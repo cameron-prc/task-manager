@@ -44,6 +44,14 @@ public class TaskSchedulerService {
         taskSchedulerRepository.delete(taskScheduler);
     }
 
+    /**
+     * Runs every hour
+     *
+     * Check all task schedulers to see if they need to be executed.
+     *
+     * If the scheduler is executed, the corresponding task will be created
+     *
+     */
     @Scheduled(cron = "0 0 * * * ?")
     private void createScheduledTasks() {
         System.out.println("In scheduled task");
@@ -62,11 +70,16 @@ public class TaskSchedulerService {
             CronParser parser = new CronParser(cronDefinition);
 
             // Calculate the next execution time for the task scheduler from the last run time
-            ExecutionTime executionTime = ExecutionTime.forCron(parser.parse(taskScheduler.getCron()));
+            ExecutionTime executionTime = ExecutionTime.forCron(parser.parse(taskScheduler.getFrequencyCron()));
             Optional<ZonedDateTime> nextExecution = executionTime.nextExecution(withTimezone);
 
             // If the the current time is greater the the next scheduled execution time, initiate the creation
-            if(nextExecution.isPresent() && nextExecution.get().isBefore(ZonedDateTime.now())) {
+            if(nextExecution.isPresent() &&
+                    nextExecution.get()
+                            .minus(Duration.ofDays(taskScheduler.getDaysWarning()))
+                            .isBefore(ZonedDateTime.now())) {
+
+
                 TaskTemplate template = taskScheduler.getTaskTemplate();
 
                 // Determine if an instance of the task already exists
@@ -77,10 +90,9 @@ public class TaskSchedulerService {
                     }
                 }
 
-                // Create the due date for the new task
-                Instant now = Instant.now();
-                Instant before = now.plus(Duration.ofDays(7)); // TODO: Add ability to specify this through the scheduler/template
-                Date date = Date.from(before);
+                // Convert next execution time from zoned date time to date as required by Task
+                Date date = Date.from(nextExecution.get().toInstant());
+
 
                 Task newTask = new Task(template.getName(), template.getDescription(), date, false);
 
